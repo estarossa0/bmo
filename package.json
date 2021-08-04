@@ -1,0 +1,21 @@
+{
+  "name": "discordbot",
+  "version": "1.0.0",
+  "description": "bot to learn server side js",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "estarossa",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^13.0.0-dev.t1627906063.6e0ea02",
+    "fs": "^0.0.1-security"
+  },
+  "devDependencies": {
+    "typescript": "^4.3.5",
+    "eslint": "^7.31.0",
+    "nodemon": "^2.0.12"
+  }
+}
