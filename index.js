@@ -2,7 +2,7 @@ import { Client, Collection } from 'discord.js';
 import { readFileSync } from 'fs';
 import getCommands from './commandsHandler.js';
 
-const data = JSON.parse(readFileSync('./config.json'));
+const config = JSON.parse(readFileSync('./config.json'));
 
 const client = new Client({
   intents: ['DIRECT_MESSAGES', 'GUILD_MESSAGES', 'GUILDS'],
@@ -44,4 +44,4 @@ client.on('interactionCreate', async (interaction) => {
   }
 });
 
-client.login(data.token);
+client.login(config.discord.token);
