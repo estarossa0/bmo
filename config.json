@@ -2,4 +2,9 @@
 	"discord": {
 		"token" : ""
 	},
+	"intra" : {
+		"uid": "",
+		"secret": "",
+		"token": ""
+	}
 }
