@@ -1,8 +1,8 @@
 import { Client, Collection } from 'discord.js';
-import { readFileSync } from 'fs';
 import getCommands from './commandsHandler.js';
+import { config } from 'dotenv';
 
-const config = JSON.parse(readFileSync('./config.json'));
+config();
 
 const client = new Client({
   intents: ['DIRECT_MESSAGES', 'GUILD_MESSAGES', 'GUILDS'],
@@ -44,4 +44,4 @@ client.on('interactionCreate', async (interaction) => {
   }
 });
 
-client.login(config.discord.token);
+client.login(process.env.DISCORD_TOKEN);
