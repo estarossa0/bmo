@@ -1,9 +1,11 @@
 import { Client, Collection } from 'discord.js';
 import getCommands from './commandsHandler.js';
 import { config } from 'dotenv';
+import { getNewToken } from './cred.js';
 
 config();
 
+process.env.INTRA_TOKEN = await getNewToken();
 const client = new Client({
   intents: ['DIRECT_MESSAGES', 'GUILD_MESSAGES', 'GUILDS'],
 });
