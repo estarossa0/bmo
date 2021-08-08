@@ -10,13 +10,14 @@
   "author": "estarossa",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^13.0.0-dev.t1627906063.6e0ea02",
+    "discord.js": "^13.0.1",
     "dotenv": "^10.0.0",
-    "fs": "^0.0.1-security"
+    "fs": "^0.0.1-security",
+    "node-fetch": "^2.6.1"
   },
   "devDependencies": {
-    "typescript": "^4.3.5",
     "eslint": "^7.31.0",
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.12",
+    "typescript": "^4.3.5"
   }
 }
