@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+import extend from '../utils/fetchExtend.js';
 import { MessageEmbed } from 'discord.js';
 
 const command = {
@@ -18,22 +18,26 @@ const command = {
       (arg) => arg.name === 'username'
     ).value;
 
-    const userData = await fetch(
-      `https://api.intra.42.fr/v2/users/${userName}`,
-      {
+    const fetchIntra = extend({
+      prefixUrl: 'https://api.intra.42.fr/v2/',
+      options: {
         headers: {
           Authorization: `Bearer ${process.env.INTRA_TOKEN}`,
         },
-      }
-    ).then(async (response) => {
-      if (!response.ok)
-        throw new Error(
-          response.status === 404
-            ? 'username not found'
-            : `intern server error ${response.status}`
-        );
-      return response.json();
+      },
     });
+
+    const userData = await fetchIntra(`users/${userName}`).then(
+      async (response) => {
+        if (!response.ok)
+          throw new Error(
+            response.status === 404
+              ? 'username not found'
+              : `intern server error ${response.status}`
+          );
+        return response.json();
+      }
+    );
 
     embedReply
       .setColor('#00babc')
