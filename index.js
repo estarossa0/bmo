@@ -39,6 +39,7 @@ client.on('interactionCreate', async (interaction) => {
   try {
     await client.commands.get(interaction.commandName).execute(interaction);
   } catch (err) {
+    console.log(err);
     await interaction.reply({
       content: 'There was an error while executing this command!',
       ephemeral: true,
@@ -46,4 +47,4 @@ client.on('interactionCreate', async (interaction) => {
   }
 });
 
-client.login(process.env.DISCORD_TOKEN);
+client.login(process.env.DISCORD_TOKEN).catch((err) => console.log(err));
