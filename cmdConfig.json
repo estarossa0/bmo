@@ -1,0 +1,12 @@
+{
+  "restaurant": {
+    "lunch": {
+      "start": "12",
+      "end": "15"
+    },
+    "dinner": {
+      "start": "18",
+      "end": "20"
+    }
+  }
+}
