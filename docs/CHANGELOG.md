@@ -1,12 +1,25 @@
 # Changelog
 All notable changes to this project will be documented in this file.
-## [Unreleased]
+## [Upcoming]
+* Commands:
+	* `examsub`  get notified when new is exam is on
+	* `examunsub` stop getting notified about new exams
+	* `exam` check if there is any exams currently
+	* **`init`** after using this command bot will use the user credentials for all upcoming intra related commands
+* Docs
+	* `README.md`
+	* `CONTIRBUTING.md`
+
+## [[2.0.0]](https://github.com/estarossa0/1337DiscordBot/tags) (2021-08-19)
+### Changed
+* 1337DiscordBot is now in `typescript` 🎉✨
+* dropped `node-fetch` and start using [`got`](https://github.com/sindresorhus/got)
+* project structure is better now
 ### Added
-* `examsub` command
-* `rest` command
-* `needHelp` command
-* `subHelp` command
-* function to create a new `node-fetch` instance with predefined options
+* `rest` command for restaurant schedule
+### Fixed
+* `ping` command is more accurate
+* missing `ephemeral` in both `echo` and `ping`
 
 ## [[1.0.1]](https://github.com/estarossa0/1337DiscordBot/tags) (2021-08-08)
 ### Fixed
