@@ -12,9 +12,12 @@ const command: Command = {
     },
   ],
   async execute(interaction) {
-    await interaction.reply(
-      `${interaction.options.data.find((arg) => arg.name === 'input')?.value}`
-    );
+    await interaction.reply({
+      content: `${
+        interaction.options.data.find((arg) => arg.name === 'input')?.value
+      }`,
+      ephemeral: process.env.EPHEMERAL === 'true',
+    });
   },
 };
 

@@ -4,7 +4,10 @@ const command: Command = {
   name: 'ping',
   description: 'Replies with server ping',
   async execute(interaction) {
-    await interaction.reply(`${Date.now() - interaction.createdTimestamp} ms`);
+    await interaction.reply({
+      content: `${Date.now() - interaction.createdTimestamp} ms`,
+      ephemeral: process.env.EPHEMERAL === 'true',
+    });
   },
 };
 
