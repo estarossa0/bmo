@@ -2,8 +2,7 @@
   "name": "discordbot",
   "version": "1.0.1",
   "description": "bot to learn server side js",
-  "main": "index.js",
-  "type": "module",
+  "main": "./src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

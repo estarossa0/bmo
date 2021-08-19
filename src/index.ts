@@ -5,7 +5,7 @@ import { getNewToken } from './utils/cred';
 import type { Command } from './types';
 
 async function main() {
-  config();
+  config({ path: './src/config/.env' });
 
   process.env.INTRA_TOKEN = await getNewToken();
   const client: Client & { commands?: Collection<string, Command> } =
