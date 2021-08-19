@@ -1,11 +1,12 @@
 import { readFileSync } from 'fs';
+import type { Command } from '../types';
 
 function getRestaurant() {
   const data = JSON.parse(readFileSync('./cmdConfig.json', 'ascii'));
   return data.restaurant;
 }
 
-const command = {
+const command: Command = {
   name: 'rest',
   description: 'tell you restaurant schedule',
   async execute(interaction) {

@@ -1,4 +1,6 @@
-const command = {
+import type { Command } from '../types';
+
+const command: Command = {
   name: 'echo',
   description: 'Replies with your INPUT argument',
   options: [
@@ -11,7 +13,7 @@ const command = {
   ],
   async execute(interaction) {
     await interaction.reply(
-      `${interaction.options.data.find((arg) => arg.name === 'input').value}`
+      `${interaction.options.data.find((arg) => arg.name === 'input')?.value}`
     );
   },
 };

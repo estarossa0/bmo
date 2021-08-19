@@ -1,7 +1,8 @@
 import { readdirSync } from 'fs';
+import { Command } from '../types';
 
-async function getCommands() {
-  const promisesArray = [];
+async function getCommands(): Promise<Command[]> {
+  const promisesArray: Promise<Command>[] = [];
 
   const commandFiles = readdirSync('./commands').filter((file) =>
     file.endsWith('.js')

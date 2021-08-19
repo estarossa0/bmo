@@ -1,4 +1,6 @@
-const command = {
+import type { Command } from '../types';
+
+const command: Command = {
   name: 'full',
   description: 'give the cclean tool link',
   async execute(interaction) {

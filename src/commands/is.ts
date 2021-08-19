@@ -1,4 +1,6 @@
-const command = {
+import type { Command } from '../types';
+
+const command: Command = {
   name: 'is',
   description: 'give the iscsi link',
   async execute(interaction) {

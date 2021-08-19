@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 
-function merge(target, source) {
+function merge(target: any, source: any) {
   for (const key of Object.keys(source)) {
     if (source[key] instanceof Object)
       Object.assign(source[key], merge(target[key], source[key]));
@@ -10,9 +10,12 @@ function merge(target, source) {
   return target;
 }
 
-function extend(args) {
+function extend(args: { prefixUrl: string; options: any }) {
   const { prefixUrl, options } = args;
-  const fetchExtended = (appendUrl, appendOptions) => {
+  const fetchExtended = (
+    appendUrl: string,
+    appendOptions?: RequestInfo
+  ): Promise<Response> => {
     return fetch(
       `${prefixUrl.replace(/[/]+$/, '')}/${appendUrl.replace(/^[/]+/, '')}`,
       merge(options || {}, appendOptions || {})

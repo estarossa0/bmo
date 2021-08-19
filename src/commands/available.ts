@@ -1,7 +1,9 @@
 import extend from '../utils/fetchExtend.js';
 import { MessageEmbed } from 'discord.js';
+import type { Command } from '../types';
+import { Headers } from 'node-fetch';
 
-const command = {
+const command: Command = {
   name: 'available',
   description: 'give info about USERNAME',
   options: [
@@ -16,14 +18,15 @@ const command = {
     const embedReply = new MessageEmbed();
     const userName = interaction.options.data.find(
       (arg) => arg.name === 'username'
-    ).value;
+    )?.value;
 
+    const h = new Headers({
+      Authorization: `Bearer ${process.env.INTRA_TOKEN}`,
+    });
     const fetchIntra = extend({
       prefixUrl: 'https://api.intra.42.fr/v2/',
       options: {
-        headers: {
-          Authorization: `Bearer ${process.env.INTRA_TOKEN}`,
-        },
+        headers: h,
       },
     });
 
@@ -41,7 +44,7 @@ const command = {
 
     embedReply
       .setColor('#00babc')
-      .setTitle(userName)
+      .setTitle(typeof userName === 'string' ? userName : 'Title')
       .setURL(`https://profile.intra.42.fr/users/${userName}`)
       .setThumbnail(userData.image_url)
       .addFields(
@@ -52,13 +55,14 @@ const command = {
         { name: '\u200B', value: '\u200B' },
         {
           name: 'Campus',
-          value: userData.campus.find((campus) => campus.active === true).name,
+          value: userData.campus.find((campus: any) => campus.active === true)
+            .name,
           inline: true,
         },
         {
           name: 'Level',
           value: userData.cursus_users
-            .find((cursus) => cursus.end_at === null)
+            .find((cursus: any) => cursus.end_at === null)
             .level.toString(),
           inline: true,
         },

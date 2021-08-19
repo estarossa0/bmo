@@ -1,6 +1,7 @@
 import { MessageEmbed } from 'discord.js';
+import type { Command } from '../types';
 
-const command = {
+const command: Command = {
   name: 'tools',
   description: 'give script to install all tools',
   async execute(interaction) {
