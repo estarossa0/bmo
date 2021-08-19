@@ -1,7 +1,6 @@
-import extend from '../utils/fetchExtend.js';
 import { MessageEmbed } from 'discord.js';
 import type { Command } from '../types';
-import { Headers } from 'node-fetch';
+import got from 'got';
 
 const command: Command = {
   name: 'available',
@@ -20,27 +19,21 @@ const command: Command = {
       (arg) => arg.name === 'username'
     )?.value;
 
-    const h = new Headers({
-      Authorization: `Bearer ${process.env.INTRA_TOKEN}`,
-    });
-    const fetchIntra = extend({
-      prefixUrl: 'https://api.intra.42.fr/v2/',
-      options: {
-        headers: h,
+    const userData = await got('https://api.intra.42.fr/v2/users/arraji', {
+      headers: {
+        Authorization: `Bearer ${process.env.INTRA_TOKEN}`,
       },
-    });
-
-    const userData = await fetchIntra(`users/${userName}`).then(
-      async (response) => {
-        if (!response.ok)
-          throw new Error(
-            response.status === 404
-              ? 'username not found'
-              : `intern server error ${response.status}`
-          );
-        return response.json();
+      throwHttpErrors: false,
+    }).then(async (response) => {
+      if (response.statusCode != 200) {
+        throw new Error(
+          response.statusCode === 404
+            ? 'username not found'
+            : `intern server error ${response.statusCode}`
+        );
       }
-    );
+      return JSON.parse(response.body);
+    });
 
     embedReply
       .setColor('#00babc')
