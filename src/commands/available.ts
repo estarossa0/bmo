@@ -19,7 +19,7 @@ const command: Command = {
       (arg) => arg.name === 'username'
     )?.value;
 
-    const userData = await got('https://api.intra.42.fr/v2/users/arraji', {
+    const userData = await got(`https://api.intra.42.fr/v2/users/${userName}`, {
       headers: {
         Authorization: `Bearer ${process.env.INTRA_TOKEN}`,
       },
