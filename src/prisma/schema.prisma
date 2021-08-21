@@ -1,0 +1,15 @@
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model ExamSubscriber {
+  id          Int         @id @default(autoincrement())
+  discord_id  String      @unique
+  totalNotif  Int         @default(0)
+  subTime     DateTime    @default(now())
+}

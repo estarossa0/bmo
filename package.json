@@ -1,6 +1,6 @@
 {
   "name": "discordbot",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "bot to learn server side js",
   "main": "./src/index.ts",
   "scripts": {
@@ -10,6 +10,7 @@
   "author": "estarossa",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^2.29.0",
     "discord.js": "^13.0.1",
     "dotenv": "^10.0.0",
     "fs": "^0.0.1-security",
@@ -18,7 +19,11 @@
   "devDependencies": {
     "eslint": "^7.31.0",
     "nodemon": "^2.0.12",
+    "prisma": "^2.29.0",
     "ts-node": "^10.2.0",
     "typescript": "^4.3.5"
+  },
+  "prisma": {
+    "schema": "./src/prisma/schema.prisma"
   }
 }
