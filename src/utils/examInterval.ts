@@ -68,7 +68,8 @@ async function checkExam(client: Client) {
 }
 
 async function startInterval(client: Client, hours: number) {
-  if (!interval) interval = setInterval(checkExam, 1000, client);
+  if (!interval)
+    interval = setInterval(checkExam, hours * 60 * 60 * 1000, client);
 }
 
 async function stopInterval() {
