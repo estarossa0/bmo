@@ -1,13 +1,13 @@
-import type { Command } from '../types';
-import prisma from '../prisma/client';
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
-import { stopInterval } from '../utils/examInterval';
+import type { Command } from "../types";
+import prisma from "../prisma/client";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
+import { stopInterval } from "../utils/examInterval";
 
 const command: Command = {
-  name: 'unsubexam',
-  description: 'unsubscribe from getting notified on new exam event',
+  name: "unsubexam",
+  description: "unsubscribe from getting notified on new exam event",
   async execute(interaction) {
-    let reply: string = '';
+    let reply = "";
 
     await prisma.examSubscriber
       .delete({
@@ -24,7 +24,7 @@ const command: Command = {
         });
       })
       .catch((err: PrismaClientKnownRequestError) => {
-        if (err.code === 'P2025') {
+        if (err.code === "P2025") {
           reply =
             "You're not in subsribed list! so you're already unsubscribed";
           return;
@@ -34,7 +34,7 @@ const command: Command = {
 
     await interaction.reply({
       content: reply,
-      ephemeral: process.env.EPHEMERAL === 'true',
+      ephemeral: process.env.EPHEMERAL === "true",
     });
   },
 };

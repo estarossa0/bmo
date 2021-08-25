@@ -1,4 +1,4 @@
-import got from 'got';
+import got from "got";
 import { URLSearchParams } from "url";
 
 interface TokenResponse {

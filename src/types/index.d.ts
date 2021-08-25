@@ -1,4 +1,4 @@
-import { CommandInteraction, ApplicationCommandData } from 'discord.js';
+import { CommandInteraction, ApplicationCommandData } from "discord.js";
 
 type CommadOptions = {
   type: string;

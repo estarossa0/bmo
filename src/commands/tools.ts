@@ -1,26 +1,26 @@
-import { MessageEmbed } from 'discord.js';
-import type { Command } from '../types';
+import { MessageEmbed } from "discord.js";
+import type { Command } from "../types";
 
 const command: Command = {
-  name: 'tools',
-  description: 'give script to install all tools',
+  name: "tools",
+  description: "give script to install all tools",
   async execute(interaction) {
     const embedReply = new MessageEmbed();
 
     embedReply
-      .setColor('GREEN')
+      .setColor("GREEN")
       .addField(
-        'this script can install these tools for you:',
-        'brew, also valgrind, htop, docker, docker-machine, minikube using brew'
+        "this script can install these tools for you:",
+        "brew, also valgrind, htop, docker, docker-machine, minikube using brew",
       )
-      .addField('link:', 'https://github.com/ombhd/my_tools_installer')
+      .addField("link:", "https://github.com/ombhd/my_tools_installer")
       .setImage(
-        'https://raw.githubusercontent.com/estarossa0/save/master/bot_tools.PNG'
+        "https://raw.githubusercontent.com/estarossa0/save/master/bot_tools.PNG",
       );
 
     interaction.reply({
       embeds: [embedReply],
-      ephemeral: process.env.EPHEMERAL === 'true',
+      ephemeral: process.env.EPHEMERAL === "true",
     });
   },
 };
