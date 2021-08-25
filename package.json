@@ -13,11 +13,12 @@
     "@prisma/client": "^2.29.0",
     "discord.js": "^13.0.1",
     "dotenv": "^10.0.0",
+    "express": "^4.17.1",
     "fs": "^0.0.1-security",
     "got": "^11.8.2"
   },
   "devDependencies": {
-    "eslint": "^7.31.0",
+    "@types/express": "^4.17.13",
     "nodemon": "^2.0.12",
     "prisma": "^2.29.0",
     "ts-node": "^10.2.0",

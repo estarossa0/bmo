@@ -3,11 +3,12 @@ import getCommands from './utils/commandsHandler';
 import { config } from 'dotenv';
 import { getNewToken } from './utils/cred';
 import type { Command } from './types';
+import app from "./api/auth.route";
 
 async function main() {
   config({ path: './src/config/.env' });
 
-  process.env.INTRA_TOKEN = await getNewToken();
+  process.env.INTRA_TOKEN = (await getNewToken())?.access_token;
   const client: Client & { commands?: Collection<string, Command> } =
     new Client({
       intents: ['DIRECT_MESSAGES', 'GUILD_MESSAGES', 'GUILDS'],
@@ -51,6 +52,7 @@ async function main() {
   });
 
   client.login(process.env.DISCORD_TOKEN).catch((err) => console.log(err));
+  app.listen(process.env.PORT || 80, () => console.log("api ready"));
 }
 
 main().catch((err) => console.log(err));

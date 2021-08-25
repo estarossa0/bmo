@@ -12,3 +12,13 @@ model ExamSubscriber {
   discord_id  String      @unique
   subTime     DateTime    @default(now())
 }
+
+model UsersToken {
+  id            String   @id @default(cuid())
+  discord_id    String   @unique
+  intra_id      Int?
+  messages_ids  String[]
+  refresh_token String?
+  resolved      Boolean  @default(false)
+
+}
