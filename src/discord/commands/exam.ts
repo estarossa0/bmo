@@ -6,6 +6,10 @@ const command: Command = {
   name: "exam",
   description: "Check if there is an exam currently",
   async execute(interaction) {
+    await interaction.deferReply({
+      ephemeral: process.env.EPHEMERAL === "true",
+    });
+
     got<Array<any>>("https://api.intra.42.fr/v2/campus/16/cursus/21/exams", {
       headers: {
         Authorization: `Bearer ${process.env.INTRA_TOKEN}`,
@@ -18,10 +22,9 @@ const command: Command = {
         const examEndTime = new Date(response[0].end_at);
         const now = Date.now();
         if (examEndTime.getTime() < now) {
-          interaction.reply({
-            content: `**NO** there is no exam currently. Last exam was ${examEndTime.toDateString()}`,
-            ephemeral: process.env.EPHEMERAL === "true",
-          });
+          interaction.editReply(
+            `**NO** there is no exam currently. Last exam was ${examEndTime.toDateString()}`,
+          );
         } else {
           const date = new Date(response[0].begin_at);
           const embed = new MessageEmbed();
@@ -45,9 +48,8 @@ const command: Command = {
               },
             );
 
-          interaction.reply({
+          interaction.editReply({
             embeds: [embed],
-            ephemeral: process.env.EPHEMERAL === "true",
           });
         }
       })

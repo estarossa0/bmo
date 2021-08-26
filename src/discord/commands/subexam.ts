@@ -9,6 +9,9 @@ const command: Command = {
   async execute(interaction) {
     let reply = "";
 
+    await interaction.deferReply({
+      ephemeral: process.env.EPHEMERAL === "true",
+    });
     await prisma.examSubscriber
       .create({
         data: {
@@ -28,10 +31,7 @@ const command: Command = {
         }
         throw new Error(`intern server error ${err.code}`);
       });
-    await interaction.reply({
-      content: reply,
-      ephemeral: process.env.EPHEMERAL === "true",
-    });
+    await interaction.editReply(reply);
   },
 };
 
