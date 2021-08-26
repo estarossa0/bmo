@@ -1,7 +1,7 @@
-import type { Command } from "../types";
-import prisma from "../prisma/client";
+import type { Command } from "../../types";
+import prisma from "../../prisma/client";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
-import { stopInterval } from "../utils/examInterval";
+import { stopInterval } from "../../utils/examInterval";
 
 const command: Command = {
   name: "unsubexam",

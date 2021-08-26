@@ -1,4 +1,4 @@
-import type { Command } from "../types";
+import type { Command } from "../../types";
 import got from "got";
 import { MessageEmbed } from "discord.js";
 

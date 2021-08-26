@@ -1,8 +1,8 @@
 import { UsersToken } from "@prisma/client";
 import { Client, CommandInteraction, MessageEmbed } from "discord.js";
 import { URL } from "url";
-import prisma from "../prisma/client";
-import type { Command } from "../types";
+import prisma from "../../prisma/client";
+import type { Command } from "../../types";
 
 function createAuthLink(user: UsersToken): string {
   const link = new URL("https://api.intra.42.fr/oauth/authorize");

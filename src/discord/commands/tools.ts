@@ -1,5 +1,5 @@
 import { MessageEmbed } from "discord.js";
-import type { Command } from "../types";
+import type { Command } from "../../types";
 
 const command: Command = {
   name: "tools",

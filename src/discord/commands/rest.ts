@@ -1,5 +1,5 @@
 import { readFileSync } from "fs";
-import type { Command } from "../types";
+import type { Command } from "../../types";
 
 function getRestaurant() {
   const data = JSON.parse(readFileSync("./src/config/cmdConfig.json", "ascii"));

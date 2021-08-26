@@ -1,11 +1,11 @@
-import type { Command } from "../types";
+import type { Command } from "../../types";
 
 const command: Command = {
-  name: "is",
-  description: "give the iscsi link",
+  name: "full",
+  description: "give the cclean tool link",
   async execute(interaction) {
     interaction.reply({
-      content: "https://iscsi-tools.1337.ma",
+      content: "try this tool => https://github.com/ombhd/Cleaner_42",
       ephemeral: process.env.EPHEMERAL === "true",
     });
   },
