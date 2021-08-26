@@ -2,11 +2,27 @@ import express from "express";
 import got from "got";
 import prisma from "../prisma/client";
 import { getNewToken } from "../utils/cred";
+import client from "../discord/client";
+import { UsersToken } from "@prisma/client";
+import { MessageEmbed } from "discord.js";
 
 const app = express();
 
+const updateMessage = async (user: UsersToken): Promise<void> => {
+  const discordUser = await client.users.fetch(user.discord_id);
+
+  user.messages_ids.forEach(async (mId) => {
+    const message = await discordUser.dmChannel?.messages.fetch(mId);
+    const embed = new MessageEmbed()
+      .setTitle("Autorisation successfully")
+      .setColor("GREEN");
+    message?.edit({
+      embeds: [embed],
+    });
+  });
+};
+
 app.get("/auth", async (req, res) => {
-  console.log("s");
   if (!req.query.code || !req.query.state) {
     res.send("Missing params");
     return;
@@ -31,24 +47,27 @@ app.get("/auth", async (req, res) => {
     return;
   }
 
-  got("https://api.intra.42.fr/v2/me", {
+  const intraResponse = await got("https://api.intra.42.fr/v2/me", {
     headers: {
       Authorization: `Bearer ${data.access_token}`,
     },
-  })
-    .then(async (intraResponse) => {
-      await prisma.usersToken.update({
-        where: { id: req.query.state?.toString() },
-        data: {
-          resolved: true,
-          refresh_token: data.access_token,
-          intra_id: JSON.parse(intraResponse.body).id,
-        },
-      });
-      res.send("Autorisation successfully, you can close this tab");
-    })
-    .catch(() => {
-      res.send("Autorisation failed");
-    });
+  }).catch(() => {
+    res.send("Autorisation failed");
+    return null;
+  });
+
+  if (intraResponse === null) return;
+
+  const user = await prisma.usersToken.update({
+    where: { id: req.query.state?.toString() },
+    data: {
+      resolved: true,
+      refresh_token: data.access_token,
+      intra_id: JSON.parse(intraResponse.body).id,
+    },
+  });
+  updateMessage(user);
+  res.send("Autorisation successfully, you can close this tab");
 });
+
 export default app;
