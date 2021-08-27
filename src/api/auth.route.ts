@@ -14,7 +14,7 @@ const updateMessage = async (user: UsersToken): Promise<void> => {
   user.messages_ids.forEach(async (mId) => {
     const message = await discordUser.dmChannel?.messages.fetch(mId);
     const embed = new MessageEmbed()
-      .setTitle("Autorisation successfully")
+      .setTitle("authorized successfully")
       .setColor("GREEN");
     message?.edit({
       embeds: [embed],

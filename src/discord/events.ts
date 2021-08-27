@@ -4,9 +4,11 @@ import {
   Message,
   Collection,
 } from "discord.js";
+import prisma from "../prisma/client";
 import type { Command } from "../types";
 import getCommands from "../utils/commandsHandler";
 import client from "./client";
+import { getLogTime } from "./commands/logtime";
 
 const messageCreateHandler = async (message: Message): Promise<void> => {
   if (message.author.bot) return;
@@ -31,6 +33,27 @@ const readyHandler = async (): Promise<void> => {
 const interactionCreateHandler = async (
   interaction: Interaction,
 ): Promise<void> => {
+  if (interaction.isSelectMenu() && interaction.customId === "logtime") {
+    const month = parseInt(interaction.values[0]);
+
+    const intraId = await prisma.usersToken
+      .findUnique({
+        where: { discord_id: interaction.user.id },
+      })
+      .then((user) => user?.intra_id || null);
+
+    if (intraId === null) {
+      interaction.reply(
+        "you need to authorize with /init command to use /logtime",
+      );
+      return;
+    }
+
+    const logTime = await getLogTime(month, intraId);
+
+    interaction.update({ content: logTime, components: [] });
+  }
+
   if (!interaction.isCommand()) return;
 
   if (!client.commands?.has(interaction.commandName)) return;
