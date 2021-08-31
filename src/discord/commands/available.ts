@@ -26,15 +26,19 @@ const command: Command = {
       throwHttpErrors: false,
     }).then(async (response) => {
       if (response.statusCode != 200) {
-        throw new Error(
-          response.statusCode === 404
-            ? "username not found"
-            : `intern server error ${response.statusCode}`,
-        );
+        if (response.statusCode === 404) return null;
+
+        throw new Error();
       }
       return JSON.parse(response.body);
     });
 
+    if (userData === null) {
+      interaction.reply({
+        content: "Username not found",
+        ephemeral: process.env.EPHEMERAL === "true",
+      });
+    }
     embedReply
       .setColor("#00babc")
       .setTitle(typeof userName === "string" ? userName : "Title")
