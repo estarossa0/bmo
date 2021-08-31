@@ -5,7 +5,7 @@ const command: Command = {
   description: "Replies with server ping",
   async execute(interaction) {
     await interaction.reply({
-      content: `${interaction.createdTimestamp - Date.now()} ms`,
+      content: `${Date.now() - interaction.createdTimestamp} ms`,
       ephemeral: process.env.EPHEMERAL === "true",
     });
   },
