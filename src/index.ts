@@ -8,6 +8,16 @@ import {
   messageCreateHandler,
 } from "./discord/events";
 
+const alertCrash = (err: Error | string): void => {
+  if (!process.env.ADMINID) return;
+  client.users.fetch(process.env.ADMINID).then(async (admin) => {
+    await admin.send(
+      `bot going off: ${err instanceof Error ? err.message : err}`,
+    );
+    if (err === "SIGINT") process.exit(130);
+  });
+};
+
 async function main() {
   config({ path: "./src/config/.env" });
 
@@ -22,5 +32,6 @@ async function main() {
   client.login(process.env.DISCORD_TOKEN).catch((err) => console.log(err));
   app.listen(process.env.PORT || 8080, () => console.log("api ready"));
 }
+process.on("uncaughtExceptionMonitor", alertCrash).on("SIGINT", alertCrash);
 
-main().catch((err) => console.log(err));
+main();
