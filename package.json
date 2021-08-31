@@ -5,7 +5,9 @@
   "main": "./src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-    "bot": "ts-node ."
+    "bot": "ts-node .",
+    "dev": "ts-node-dev --rs --respawn .",
+    "parent": "ts-node ./parent/index.ts"
   },
   "author": "estarossa",
   "license": "ISC",
