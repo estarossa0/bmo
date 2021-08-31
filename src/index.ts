@@ -20,7 +20,7 @@ async function main() {
   client.on("interactionCreate", interactionCreateHandler);
 
   client.login(process.env.DISCORD_TOKEN).catch((err) => console.log(err));
-  app.listen(process.env.PORT || 80, () => console.log("api ready"));
+  app.listen(process.env.PORT || 8080, () => console.log("api ready"));
 }
 
 main().catch((err) => console.log(err));
