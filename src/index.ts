@@ -8,14 +8,15 @@ import {
   messageCreateHandler,
 } from "./discord/events";
 
-const alertCrash = (err: Error | string): void => {
-  if (!process.env.ADMINID) return;
-  client.users.fetch(process.env.ADMINID).then(async (admin) => {
-    await admin.send(
-      `bot going off: ${err instanceof Error ? err.message : err}`,
-    );
-    if (err === "SIGINT") process.exit(130);
-  });
+const alertCrash = async (err: Error | string): Promise<void> => {
+  if (process.env.ADMINID) {
+    await client.users.fetch(process.env.ADMINID).then(async (admin) => {
+      await admin.send(
+        `bot going off: ${err instanceof Error ? err.message : err}`,
+      );
+    });
+  }
+  if (err === "SIGINT") process.exit(130);
 };
 
 async function main() {
