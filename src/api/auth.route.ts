@@ -22,7 +22,7 @@ const updateMessage = async (user: UsersToken): Promise<void> => {
   });
 };
 
-app.get("/auth", async (req, res) => {
+app.get("/sb/auth", async (req, res) => {
   if (!req.query.code || !req.query.state) {
     res.send("Missing params");
     return;

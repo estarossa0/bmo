@@ -5,7 +5,7 @@ import pm2 from "pm2";
 
 const app = express();
 
-app.get("/restart", async (req, res) => {
+app.get("/sba/restart", async (req, res) => {
   if (req.query.code !== process.env.PASSWORD) {
     res.send("wrong credentials");
     return;
@@ -20,7 +20,7 @@ app.get("/restart", async (req, res) => {
   res.send("restarted");
 });
 
-app.get("/update", async (req, res) => {
+app.get("/sba/update", async (req, res) => {
   if (req.query.code !== process.env.PASSWORD) {
     res.send("wrong credentials");
     return;
