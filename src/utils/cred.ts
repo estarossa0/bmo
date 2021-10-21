@@ -9,6 +9,13 @@ interface TokenResponse {
   created_at: number;
   refresh_token?: string;
 }
+async function updateToken(): Promise<void> {
+  process.env.INTRA_TOKEN = (await getNewToken())?.access_token;
+}
+async function tokenInterval(): Promise<void> {
+  await updateToken();
+  setInterval(updateToken, 6600 * 1000);
+}
 
 async function getNewToken(code?: string): Promise<TokenResponse | null> {
   const cred = new URLSearchParams();
@@ -34,4 +41,4 @@ async function getNewToken(code?: string): Promise<TokenResponse | null> {
   }
 }
 
-export { getNewToken };
+export { getNewToken, tokenInterval };

@@ -1,5 +1,5 @@
 import { config } from "dotenv";
-import { getNewToken } from "./utils/cred";
+import { tokenInterval } from "./utils/cred";
 import app from "./api/auth.route";
 import client from "./discord/client";
 import {
@@ -17,12 +17,13 @@ const alertCrash = async (err: Error | string): Promise<void> => {
     });
   }
   if (err === "SIGINT") process.exit(130);
+  process.exit(1);
 };
 
 async function main() {
   config({ path: "./src/config/.env" });
 
-  process.env.INTRA_TOKEN = (await getNewToken())?.access_token;
+  await tokenInterval();
 
   client.once("ready", readyHandler);
 
