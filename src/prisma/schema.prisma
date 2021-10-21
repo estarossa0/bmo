@@ -20,5 +20,4 @@ model UsersToken {
   messages_ids  String[]
   refresh_token String?
   resolved      Boolean  @default(false)
-
 }
