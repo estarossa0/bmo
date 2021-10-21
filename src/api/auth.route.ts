@@ -29,15 +29,19 @@ app.get("/sb/auth", async (req, res) => {
     return;
   }
 
-  const exist = await prisma.usersToken
+  const dbUser = await prisma.usersToken
     .findUnique({
       where: { id: req.query.state.toString() },
     })
-    .then((user) => (user ? true : false))
-    .catch(() => false);
+    .catch(() => null);
 
-  if (!exist) {
+  if (!dbUser) {
     res.sendFile(path.join(__dirname, "/public/expiredLink.html"));
+    return;
+  }
+
+  if (dbUser.resolved) {
+    res.sendFile(path.join(__dirname, "/public/authorized.html"));
     return;
   }
 
