@@ -5,6 +5,7 @@ import { getNewToken } from "../utils/cred";
 import client from "../discord/client";
 import { UsersToken } from "@prisma/client";
 import { MessageEmbed } from "discord.js";
+import path from "path";
 
 const app = express();
 
@@ -24,7 +25,7 @@ const updateMessage = async (user: UsersToken): Promise<void> => {
 
 app.get("/sb/auth", async (req, res) => {
   if (!req.query.code || !req.query.state) {
-    res.send("Missing params");
+    res.sendFile(path.join(__dirname, "/public/missingParam.html"));
     return;
   }
 
@@ -36,14 +37,14 @@ app.get("/sb/auth", async (req, res) => {
     .catch(() => false);
 
   if (!exist) {
-    res.send("Link probably expired. Get new link from the bot");
+    res.sendFile(path.join(__dirname, "/public/expiredLink.html"));
     return;
   }
 
   const data = await getNewToken(req.query.code as string);
 
   if (!data) {
-    res.send("Autorisation failed");
+    res.sendFile(path.join(__dirname, "/public/unauthorized.html"));
     return;
   }
 
@@ -52,7 +53,7 @@ app.get("/sb/auth", async (req, res) => {
       Authorization: `Bearer ${data.access_token}`,
     },
   }).catch(() => {
-    res.send("Autorisation failed");
+    res.sendFile(path.join(__dirname, "/public/unauthorized.html"));
     return null;
   });
 
@@ -67,7 +68,7 @@ app.get("/sb/auth", async (req, res) => {
     },
   });
   updateMessage(user);
-  res.send("Autorisation successfully, you can close this tab");
+  res.sendFile(path.join(__dirname, "/public/authorized.html"));
 });
 
 export default app;

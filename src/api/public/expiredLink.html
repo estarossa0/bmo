@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <title>Document</title>
+    <style>
+      body {
+        background: #368dda;
+      }
+
+      .bubble {
+        position: relative;
+        font-family: sans-serif;
+        font-size: 18px;
+        line-height: 24px;
+        background: #fff;
+        border-radius: 40px;
+        padding: 24px;
+        text-align: center;
+        color: #000;
+      }
+
+      .bubble-bottom-left:before {
+        content: "";
+        width: 0px;
+        height: 0px;
+        position: absolute;
+        border-left: 24px solid #fff;
+        border-right: 12px solid transparent;
+        border-top: 12px solid #fff;
+        border-bottom: 20px solid transparent;
+        right: 70px;
+        bottom: -24px;
+      }
+    </style>
+  </head>
+  <body
+    class="flex items-center justify-center h-screen content-center flex-col"
+    style="background: linear-gradient(to left, #ffa17f, #00223e)"
+  >
+    <div>
+      <div class="bubble bubble-bottom-left mb-7 w-48 md:w-72">
+        <p class="text-base lg:text-3xl text-center">
+          Whoups I think link is wrong or got expired.
+        </p>
+      </div>
+      <div class="w-28 sm:w-44 md:w-54 lg:w-60 inline-block">
+        <img
+          class="img-fluid"
+          src="https://raw.githubusercontent.com/estarossa0/1337DiscordBot/dev/src/api/public/images/bmoSurprised.png"
+        />
+      </div>
+    </div>
+  </body>
+</html>
