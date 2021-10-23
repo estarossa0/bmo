@@ -16,6 +16,7 @@ pm2.start(
     script: "npm",
     name: "bot",
     args: ["run", "bot"],
+    output: "logs",
   },
   (err) => {
     if (err) {
