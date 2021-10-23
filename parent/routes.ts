@@ -7,41 +7,41 @@ const app = express();
 
 app.get("/sba/restart", async (req, res) => {
   if (req.query.code !== process.env.PASSWORD) {
-    res.send("wrong credentials");
+    res.status(401).send("unauthorized");
     return;
   }
-
   pm2.restart("bot", (err) => {
-    if (err) res.send("failed to restart");
-
-    console.log("restarted");
+    if (err) {
+      res.status(500).send("failed to restart");
+      return;
+    }
+    res.send("restarted");
   });
-
-  res.send("restarted");
 });
 
 app.get("/sba/update", async (req, res) => {
   if (req.query.code !== process.env.PASSWORD) {
-    res.send("wrong credentials");
+    res.status(401).send("wrong credentials");
     return;
   }
+  let restarted = true;
 
   exec("git pull", (err, stdout, stderr) => {
     if (err) {
       res.status(500).send(`could not git pull\n${stderr}`);
+      return;
     }
+
+    pm2.restart("bot", (err) => {
+      if (err) restarted = false;
+    });
+
     res.send(`<!DOCTYPE html>
     <html>
       <body>
-        <p>Pulled successfully, restarting in 3 seconds</p>
+        <p>${restarted ? "restarted" : "failed to restart"}</p>
         <p>${stdout}</p>
       </body>
-      <script>
-      setTimeout(() => {
-        const qs = window.location.search;
-        window.location.replace(\`restart\${qs ?? null}\`);
-      }, 3000);
-      </script>
     </html>`);
   });
 });
