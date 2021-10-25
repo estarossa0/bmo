@@ -9,13 +9,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set short SHA
+      - name: Set vars
         id: vars
-        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
-
-      - name: Set version
-        id: vars
-        run: echo "::set-output name=version::$(git describe --tags --abbrev=0 --match "v*")"
+        run: |
+          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+          echo "::set-output name=version::$(git describe --tags --abbrev=0 --match "v*")"
 
       - name: Trigger deployment
         run: |
