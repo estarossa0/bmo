@@ -2,10 +2,13 @@ import got from "got";
 import { Client, MessageEmbed } from "discord.js";
 import prisma from "../prisma/client";
 
-let lastExamId: number | undefined = undefined;
+const lastExamId: { kh: number | undefined; bg: number | undefined } = {
+  kh: undefined,
+  bg: undefined,
+};
 let interval: NodeJS.Timer | null = null;
 
-async function notifySubs(client: Client, exam: any) {
+async function notifySubs(client: Client, exam: any, campus: string) {
   const embed = new MessageEmbed();
 
   const weekdays = new Array(7);
@@ -18,7 +21,6 @@ async function notifySubs(client: Client, exam: any) {
   weekdays[6] = "Saturday";
 
   const date = new Date(exam.begin_at);
-  lastExamId = exam.id;
 
   embed
     .setTitle("New exam")
@@ -39,7 +41,9 @@ async function notifySubs(client: Client, exam: any) {
       },
     );
 
-  const subs = await prisma.examSubscriber.findMany();
+  const subs = await prisma.examSubscriber.findMany({
+    where: { campus: campus },
+  });
   subs.forEach((subscriber) => {
     client.users
       .fetch(subscriber.discord_id)
@@ -47,24 +51,36 @@ async function notifySubs(client: Client, exam: any) {
   });
 }
 
+async function fetchCampusExam(client: Client, campus: string) {
+  const campusName = campus === "16" ? "kh" : "bg";
+
+  got<Array<any>>(
+    `https://api.intra.42.fr/v2/campus/${campus}/cursus/21/exams`,
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.INTRA_TOKEN}`,
+      },
+      resolveBodyOnly: true,
+      responseType: "json",
+    },
+  )
+    .then((response) => {
+      if (lastExamId[campusName] === undefined)
+        lastExamId[campusName] = response[0].id;
+      if (response[0].id != lastExamId[campusName]) {
+        lastExamId[campusName] = response[0].id;
+        notifySubs(client, response[0], campus);
+      }
+    })
+    .catch((err) => console.log(err));
+}
+
 async function checkExam(client: Client) {
   const time = new Date().getHours();
 
   if (time > 18 || time < 10) return;
-  got<Array<any>>("https://api.intra.42.fr/v2/campus/16/cursus/21/exams", {
-    headers: {
-      Authorization: `Bearer ${process.env.INTRA_TOKEN}`,
-    },
-    throwHttpErrors: false,
-    resolveBodyOnly: true,
-    responseType: "json",
-  })
-    .then((response) => {
-      if (response[0].id != lastExamId) {
-        notifySubs(client, response[0]);
-      }
-    })
-    .catch((err) => console.log(err));
+  fetchCampusExam(client, "16");
+  fetchCampusExam(client, "21");
 }
 
 async function startInterval(client: Client, hours: number): Promise<void> {

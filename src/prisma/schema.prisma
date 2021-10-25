@@ -11,6 +11,7 @@ model ExamSubscriber {
   id         Int      @id @default(autoincrement())
   discord_id String   @unique
   subTime    DateTime @default(now())
+  campus     String
 }
 
 model UsersToken {

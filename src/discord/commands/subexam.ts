@@ -6,16 +6,31 @@ import { startInterval } from "../../utils/examInterval";
 const command: Command = {
   name: "subexam",
   description: "subscripe to get notified when there is new exam",
+  options: [
+    {
+      name: "campus",
+      type: "STRING",
+      required: true,
+      description: "Your campus",
+      choices: [
+        { name: "Khouribga", value: "16" },
+        { name: "Benguerir", value: "21" },
+      ],
+    },
+  ],
   async execute(interaction) {
     let reply = "";
 
     await interaction.deferReply({
       ephemeral: process.env.EPHEMERAL === "true",
     });
+
+    const campus = interaction.options.getString("campus", true);
     await prisma.examSubscriber
       .create({
         data: {
           discord_id: interaction.user.id,
+          campus: campus,
         },
       })
       .then(() => {
