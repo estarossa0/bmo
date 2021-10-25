@@ -1,0 +1,29 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Deploy
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set short SHA
+        id: vars
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
+      - name: Set version
+        id: vars
+        run: echo "::set-output name=version::$(git describe --tags --abbrev=0 --match "v*")"
+
+      - name: Trigger deployment
+        run: |
+          echo "Deploying commit ${{ steps.vars.outputs.sha_short }} and Version ${{ steps.vars.outputs.version }}"
+          curl -H "Authorization: ${{ secrets.DEPLOYER_SECRET }}" -d "commitHash=${{ steps.vars.outputs.sha_short }}&version=${{ steps.vars.outputs.version }}" -X POST ${{ secrets.DEPLOYER_URL }}
