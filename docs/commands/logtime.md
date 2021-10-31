@@ -1,11 +1,11 @@
 ### Description
 
-Tell you the total log time for the current or a specific month.
+Tells you the total log time for the current or a specific month.
 
 ### Arguments
 
 - select:
-  - description: wether to select a mont or use current
+  - description: whether to select a month or use current
   - required: ❌
   - type: _string_
   - choices:
@@ -14,8 +14,8 @@ Tell you the total log time for the current or a specific month.
 
 ### How it works
 
-It fetch `/v2/users/:user_id/locations` and filter with date between beginning of the month to it's end, and keep fetching till get all location and return the total time counted.
+It fetches `/v2/users/:user_id/locations` and filters with date between beginning of the month to its end, and keeps fetching untill it gets all locations and returns the total time calculated.
 
 ### NOTES
 
-The result of total log time is quite different from the one you'll get on the intra as there no exposed logging time route, and this command only use a workaround. But it does job anyway 😅.
+The result of total log time is quite different from the one you'll get on the intra as there is no exposed logging time route, and this command only uses a workaround. But it does the job anyway 😅.

@@ -1,6 +1,6 @@
 ### Description
 
-Give the restaurant schedule
+Gives the restaurant schedule
 
 ### Arguments
 

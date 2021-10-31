@@ -1,6 +1,6 @@
 ### Description
 
-Give a [link](https://github.com/ombhd/my_tools_installer) of tools installer
+Gives a [link](https://github.com/ombhd/my_tools_installer) of tools installer
 
 ### Arguments
 

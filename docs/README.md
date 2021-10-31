@@ -13,7 +13,7 @@ BMO (spelled "_Beemo_") is a discord bot for the [1337](https://www.1337.ma/en/ 
 
 ## Usage
 
-To use any of BMO features/commands head the discord server and type "/" and a list of the available commands will get displayed with a small description for each one of the commands.
+To use any of BMO features/commands head the discord server, type "/" and a list of the available commands will get displayed with a small description for each one of them.
 
 ## Contributing
 
@@ -21,7 +21,7 @@ BMO is fully open-source and welcoming students (and any other) contribution. Fo
 
 ## Commands
 
-BMO have number of commands, here you'll find list of them with link to more details of each:
+BMO has a number of commands, here you'll find a list of them with the link to more details of each:
 
 - [available](https://github.com/estarossa0/bmo/blob/master/docs/commands/available.md)
 - [exam](https://github.com/estarossa0/bmo/blob/master/docs/commands/exam.md)
@@ -36,11 +36,11 @@ BMO have number of commands, here you'll find list of them with link to more det
 - [echo](https://github.com/estarossa0/bmo/blob/master/docs/commands/echo.md)
 - [ping](https://github.com/estarossa0/bmo/blob/master/docs/commands/ping.md)
 
-(type "/" anywhere in discord server and you'll list of commands with small description)
+(type "/" anywhere in discord server and you'll see a list of commands with small description)
 
 ## Tools
 
-BMO is fully made with love and typescript and some other tools listed below:
+BMO is fully made with love and typescript, and some other ingredients listed below:
 
 - [Discordjs](https://discord.js.org/#/)
 - [Expressjs](https://expressjs.com/)
