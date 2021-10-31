@@ -1,6 +1,6 @@
 ### Description
 
-Give you couple information about a student.
+Gives you a couple information about a student.
 
 - Status - available on intra or not
 - Campus
@@ -16,4 +16,4 @@ Give you couple information about a student.
 
 ### How it works
 
-It fetch `/v2/users/:id` route from 42 api and get the needed informations about the user.
+It fetch `/v2/users/:id` route from 42 api and get the needed information about the user.
