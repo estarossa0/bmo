@@ -1,6 +1,6 @@
 ### Description
 
-Reply with the input you gave.
+Replies with the input you gave.
 
 ### Arguments
 
@@ -11,4 +11,4 @@ Reply with the input you gave.
 
 ### Note
 
-This command only made to test bot status.
+This command is only made to test the bot status.

@@ -1,6 +1,6 @@
 ### Description
 
-Reply with the server ping.
+Replies with the server ping.
 
 ### Arguments
 
@@ -8,4 +8,4 @@ NONE
 
 ### Note
 
-This command only made to test server status.
+This command is only made to test server status.

@@ -1,6 +1,6 @@
 ### Description
 
-Give the iscsi tool link
+Gives the iscsi tool link
 
 ### Arguments
 
