@@ -5,7 +5,7 @@ import { startInterval } from "../../utils/examInterval";
 
 const command: Command = {
   name: "subexam",
-  description: "subscripe to get notified when there is new exam",
+  description: "subscribe to get notified when there is new exam",
   options: [
     {
       name: "campus",
