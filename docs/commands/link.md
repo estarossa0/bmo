@@ -1,18 +1,14 @@
 ### Description
 
-Gives you the link to the student's 42 intra with additional informations.
-
-- Full name
-- Campus
-- Level
+Gives you the link to the student's 42 intra with his profile picture.
 
 ### Arguments
 
 - username:
-  - description: the student username
+  - description: the student username on the discord server
   - required: ✅
-  - type: _string_
+  - type: _user_
 
 ### How it works
 
-It fetch `/v2/users/:id` route from 42 api and get the needed information about the user along with the 42 intra link.
+It checks for the students intra 42 login in the username and appends it to `https://profile.intra.42.fr/users/`.
