@@ -35,6 +35,7 @@ BMO has a number of commands, here you'll find a list of them with the link to m
 - [rest](https://github.com/estarossa0/bmo/blob/master/docs/commands/rest.md)
 - [echo](https://github.com/estarossa0/bmo/blob/master/docs/commands/echo.md)
 - [ping](https://github.com/estarossa0/bmo/blob/master/docs/commands/ping.md)
+- [link](https://github.com/estarossa0/bmo/blob/master/docs/commands/link.md)
 
 (type "/" anywhere in discord server and you'll see a list of commands with small description)
 
